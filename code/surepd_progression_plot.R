@@ -3,7 +3,7 @@ library(tidyverse)
 library(grid)
 library(gridExtra)
 
-## Pre-dopaminergic dataset 
+## Pre-levodopa dataset 
 # Unidim #
 
 load('RData/SurePD_unidim_slope_beta.RData')
@@ -15,8 +15,9 @@ time <- c(0, 0.5, 1, 1.5, 2)
 dat <- data.frame(time = rep(time, 2), trt = rep(c(1, 0), each = length(time)), 
                   theta = c(active_rate*time, placebo_rate*time))
 Treatment <- rep(c('Active', 'Placebo'), each = length(time))
+dat$A1 = 'All items'
 
-p1 <- ggplot(data = dat, aes(x = time, y = theta, color = Treatment)) + 
+p1 <- ggplot(data = dat, aes(x = time, y = theta, color = Treatment, linetype = A1)) + 
   geom_point() + 
   geom_line() +
   theme(panel.grid.major = element_blank(), 
@@ -38,7 +39,7 @@ p1 <- ggplot(data = dat, aes(x = time, y = theta, color = Treatment)) +
   ylim(0, 0.6) + 
   scale_color_manual(values = c('red', 'blue')) + 
   scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2)) + 
-  ggtitle('Unidimensional for Pre-dopaminergic')
+  ggtitle('Unidimensional for pre-levodopa')
 
 ## multidim #
 load('RData/SurePD_multidim_slope_beta.RData')
@@ -78,10 +79,10 @@ p2 <- ggplot(data = dat2, aes(x = time, y = theta, linetype = Lty, color = Color
   scale_color_manual(values = c('red', 'blue')) + 
   scale_linetype_manual(values = c('longdash', 'dotted')) + 
   scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2)) + 
-  ggtitle('Multidimensional for Pre-dopaminergic')
+  ggtitle('Multidimensional for pre-levodopa')
 
 
-## dopaminergic dataset 
+## levodopa dataset 
 
 load('RData/SurePD_post_unidim_slope_beta.RData')
 beta <- beta_sample$beta
@@ -92,8 +93,9 @@ time <- c(0, 0.5, 1, 1.5, 2)
 dat3 <- data.frame(time = rep(time, 2), trt = rep(c(1, 0), each = length(time)), 
                    theta = c(active_rate*time, placebo_rate*time))
 Treatment <- rep(c('Active', 'Placebo'), each = length(time))
+dat3$A1 = 'All items'
 
-p3 <- ggplot(data = dat3, aes(x = time, y = theta, color = Treatment)) + 
+p3 <- ggplot(data = dat3, aes(x = time, y = theta, color = Treatment, linetype = A1)) + 
   geom_point() + 
   geom_line() +
   theme(panel.grid.major = element_blank(), 
@@ -115,7 +117,7 @@ p3 <- ggplot(data = dat3, aes(x = time, y = theta, color = Treatment)) +
   ylim(-0.6, 0.3) + 
   scale_color_manual(values = c('red', 'blue')) + 
   scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2)) + 
-  ggtitle('Unidimensional for Dopaminergic')
+  ggtitle('Unidimensional for levodopa therapy')
 
 ## multidim #
 load('RData/SurePD_post_multidim_slope_beta.RData')
@@ -155,7 +157,7 @@ p4 <- ggplot(data = dat4, aes(x = time, y = theta, linetype = Lty, color = Color
   scale_color_manual(values = c('red', 'blue')) + 
   scale_linetype_manual(values = c('longdash', 'dotted')) + 
   scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2)) + 
-  ggtitle('Multidimensional for Dopaminergic')
+  ggtitle('Multidimensional for levodopa therapy')
 
 
 cairo_ps(filename='plot/surepd_progression_plot_rev.eps', height=8, width = 10)
