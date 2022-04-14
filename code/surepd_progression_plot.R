@@ -17,6 +17,7 @@ dat <- data.frame(time = rep(time, 2), trt = rep(c(1, 0), each = length(time)),
 Treatment <- rep(c('Active', 'Placebo'), each = length(time))
 dat$A1 = 'All items'
 
+space = "     "
 p1 <- ggplot(data = dat, aes(x = time, y = theta, color = Treatment, linetype = A1)) + 
   geom_point() + 
   geom_line() +
@@ -32,14 +33,14 @@ p1 <- ggplot(data = dat, aes(x = time, y = theta, color = Treatment, linetype = 
         legend.position='top', 
         legend.justification='left',
         legend.direction='horizontal',
-        plot.title = element_text(hjust = 0.5)) + 
+        plot.title = element_text(hjust = 0, color="black", size=14, face="bold")) + 
   xlab('Visit Year') + 
   ylab('Theta') + 
   xlim(0, 2) + 
   ylim(0, 0.6) + 
   scale_color_manual(values = c('red', 'blue')) + 
   scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2)) + 
-  ggtitle('Unidimensional for pre-levodopa')
+  ggtitle(paste0('A', space, 'Unidimensional for pre-levodopa'))
 
 ## multidim #
 load('RData/SurePD_multidim_slope_beta.RData')
@@ -71,7 +72,7 @@ p2 <- ggplot(data = dat2, aes(x = time, y = theta, linetype = Lty, color = Color
         legend.position='top', 
         legend.justification='left',
         legend.direction='horizontal',
-        plot.title = element_text(hjust = 0.5)) + 
+        plot.title = element_text(hjust = 0, color="black", size=14, face="bold")) + 
   xlab('Visit Year') + 
   ylab('Theta') + 
   xlim(0, 2) + 
@@ -79,7 +80,7 @@ p2 <- ggplot(data = dat2, aes(x = time, y = theta, linetype = Lty, color = Color
   scale_color_manual(values = c('red', 'blue')) + 
   scale_linetype_manual(values = c('longdash', 'dotted')) + 
   scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2)) + 
-  ggtitle('Multidimensional for pre-levodopa')
+  ggtitle(paste0('B', space, 'Multidimensional for pre-levodopa'))
 
 
 ## levodopa dataset 
@@ -110,14 +111,14 @@ p3 <- ggplot(data = dat3, aes(x = time, y = theta, color = Treatment, linetype =
         legend.position='top', 
         legend.justification='left',
         legend.direction='horizontal',
-        plot.title = element_text(hjust = 0.5)) + 
+        plot.title = element_text(hjust = 0, color="black", size=14, face="bold")) + 
   xlab('Visit Year') + 
   ylab('Theta') + 
   xlim(0, 2) + 
   ylim(-0.6, 0.3) + 
   scale_color_manual(values = c('red', 'blue')) + 
   scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2)) + 
-  ggtitle('Unidimensional for levodopa therapy')
+  ggtitle(paste0('C', space, 'Unidimensional for levodopa therapy'))
 
 ## multidim #
 load('RData/SurePD_post_multidim_slope_beta.RData')
@@ -149,7 +150,7 @@ p4 <- ggplot(data = dat4, aes(x = time, y = theta, linetype = Lty, color = Color
         legend.position='top', 
         legend.justification='left',
         legend.direction='horizontal',
-        plot.title = element_text(hjust = 0.5)) + 
+        plot.title = element_text(hjust = 0, color="black", size=14, face="bold")) + 
   xlab('Visit Year') + 
   ylab('Theta') + 
   xlim(0, 2) + 
@@ -157,7 +158,7 @@ p4 <- ggplot(data = dat4, aes(x = time, y = theta, linetype = Lty, color = Color
   scale_color_manual(values = c('red', 'blue')) + 
   scale_linetype_manual(values = c('longdash', 'dotted')) + 
   scale_x_continuous(breaks = c(0, 0.5, 1, 1.5, 2)) + 
-  ggtitle('Multidimensional for levodopa therapy')
+  ggtitle(paste0('D', space, 'Multidimensional for levodopa therapy'))
 
 
 cairo_ps(filename='plot/surepd_progression_plot_rev.eps', height=8, width = 10)
